@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# 📚 EasyNotes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+EasyNotes is a web platform that helps students easily access and share study materials for different subjects.
+The application provides organized notes for various topics and allows users to browse unit-wise study materials in a simple and clean interface.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+* 📖 Access subject-wise and unit-wise notes
+* 🧑‍💻 User authentication (Login & Register)
+* 👤 User profile management
+* 📂 Organized notes for multiple subjects
+* 📄 View study materials easily
+* 📱 Responsive and simple UI
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠 Tech Stack
 
-### `npm test`
+### Frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* React.js
+* Tailwind CSS
+* JavaScript
 
-### `npm run build`
+### Backend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Node.js
+* Express.js
+* MongoDB
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Tools
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Git
+* GitHub
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📂 Project Structure
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+EasyNotes
+│
+├── backend            # Backend server and API routes
+│
+├── public             # Static assets
+│
+├── src
+│   ├── components     # Reusable UI components
+│   ├── pages          # Application pages
+│   │
+│   ├── App.js
+│   └── index.js
+│
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+└── README.md
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## ⚙️ Installation & Setup
 
-## Learn More
+### 1️⃣ Clone the repository
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+git clone https://github.com/cristianothegoat/EasyNotes-Website.git
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2️⃣ Navigate into the project
 
-### Code Splitting
+```
+cd EasyNotes-Website
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 3️⃣ Install dependencies
 
-### Analyzing the Bundle Size
+```
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 4️⃣ Start the development server
 
-### Making a Progressive Web App
+```
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The application will run on:
 
-### Advanced Configuration
+```
+http://localhost:3000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🎯 Future Improvements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+* Upload and manage notes directly from the admin panel
+* Search functionality for subjects and notes
+* Better UI and filtering system
+* Cloud storage integration for large study materials
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+⭐ If you found this project helpful, consider giving it a **star on GitHub**!
