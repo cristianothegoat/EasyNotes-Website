@@ -10,7 +10,7 @@ const TOP_SHARERS = [
         subject: "Basic C# Programming",
         emoji: "🔗",
         details: "Well-organized introductory notes covering C# syntax, data types, control structures, OOP concepts, and simple code examples to build programming fundamentals.",
-        pdfLink: "https://drive.google.com/file/d/1VUULj8ZC1yiTahIdmVBF68-0jTHORgKU/view?usp=drive_link" 
+        pdfLink: "https://drive.google.com/file/d/1VUULj8ZC1yiTahIdmVBF68-0jTHORgKU/preview" 
     },
     {
         name: "Diksha Shelar",
@@ -18,7 +18,7 @@ const TOP_SHARERS = [
         subject: "Exception Handling & Multithreading in Java",
         emoji: "💻",
         details: "Comprehensive notes covering exception types, try-catch-finally mechanisms, thread life cycle, synchronization, and inter-thread communication in Java.",
-        pdfLink: "https://drive.google.com/file/d/1B8KpAwIdKqosUeyfj4lX81w2WzF13Y63/view?usp=drive_link" 
+        pdfLink: "https://drive.google.com/file/d/1B8KpAwIdKqosUeyfj4lX81w2WzF13Y63/preview" 
     },
     {
         name: "Krish Shinde",
@@ -26,7 +26,7 @@ const TOP_SHARERS = [
         subject : "Advanced Java - Design Patterns",
         emoji : "🧠",
         details : "Comprehensive study material covering key Java design patterns such as Singleton, Factory, Observer, and Strategy, with real-world implementation examples.",
-        pdfLink: "https://drive.google.com/file/d/1EY1uTkDW3Kil4Ml75daYE4bAgxOvWf6T/view?usp=drive_link" 
+        pdfLink: "https://drive.google.com/file/d/1EY1uTkDW3Kil4Ml75daYE4bAgxOvWf6T/preview" 
     },
 ];
 
