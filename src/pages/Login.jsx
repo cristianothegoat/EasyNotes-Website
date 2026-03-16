@@ -24,19 +24,29 @@ const Login = ({ onLoginSuccess }) => {
         body: JSON.stringify({ username, password })
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data;
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error("Server returned invalid response");
+      }
 
       if (res.ok) {
         localStorage.setItem("token", data.token);
-        setMsg("Login successful! Redirecting...");
+        setMsg("Login successful!");
+
         if (onLoginSuccess) onLoginSuccess();
 
-        setTimeout(() => navigate("/"), 700);
+        setTimeout(() => navigate("/profile"), 800);
       } else {
-        setMsg(data.message || "Login failed. Check credentials.");
+        setMsg(data.message || "Login failed");
       }
-    } catch (error) {
-      setMsg("Network error. Could not connect to the server.");
+
+    } catch (err) {
+      console.error(err);
+      setMsg("Network error. Try again.");
     }
   };
 
@@ -47,9 +57,9 @@ const Login = ({ onLoginSuccess }) => {
       <main className="flex-grow flex items-center justify-center py-20 px-4">
         <form
           onSubmit={handleSubmit}
-          className="bg-gray-800 p-8 md:p-10 rounded-xl shadow-2xl max-w-sm w-full border border-gray-700"
+          className="bg-gray-800 p-8 rounded-xl shadow-xl max-w-sm w-full"
         >
-          <h2 className="text-4xl font-extrabold text-white mb-8 text-center">
+          <h2 className="text-4xl font-bold text-white mb-8 text-center">
             Sign In 🚀
           </h2>
 
@@ -79,22 +89,13 @@ const Login = ({ onLoginSuccess }) => {
           </button>
 
           {msg && (
-            <p
-              className={`mt-5 text-center ${
-                msg.includes("successful") ? "text-green-400" : "text-red-400"
-              }`}
-            >
-              {msg}
-            </p>
+            <p className="mt-5 text-center text-red-400">{msg}</p>
           )}
 
           <div className="mt-6 text-center text-sm">
             <p>
               Don't have an account?
-              <Link
-                to="/register"
-                className="ml-2 text-yellow-400 hover:text-yellow-300"
-              >
+              <Link to="/register" className="ml-2 text-yellow-400">
                 Register Here
               </Link>
             </p>
