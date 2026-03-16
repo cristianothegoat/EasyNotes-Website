@@ -3,7 +3,7 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE = "https://easynotes-backend-btcw.onrender.com";
+const API_URL = "https://easynotes-backend-btcw.onrender.com";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -13,7 +13,7 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
+    const fetchProfile = async () => {
       const token = localStorage.getItem("token");
 
       if (!token) {
@@ -22,49 +22,47 @@ const Profile = () => {
       }
 
       try {
-        const res = await fetch(`${API_BASE}/api/auth/profile`, {
+        const res = await fetch(`${API_URL}/api/auth/profile`, {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
 
+        // if token expired
         if (res.status === 401 || res.status === 403) {
           localStorage.removeItem("token");
           navigate("/login");
           return;
         }
 
-        if (!res.ok) {
-          throw new Error("Failed to fetch profile");
+        const contentType = res.headers.get("content-type");
+
+        // check if response is JSON
+        if (!contentType || !contentType.includes("application/json")) {
+          throw new Error("Server returned invalid response");
         }
 
-        // Safe JSON parsing
-        const text = await res.text();
-        const data = text ? JSON.parse(text) : {};
-
+        const data = await res.json();
         setUserInfo(data);
 
       } catch (err) {
-        console.error("Profile fetch error:", err);
+        console.error("Profile error:", err);
         setError("Could not load profile. Please login again.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUserProfile();
+    fetchProfile();
   }, [navigate]);
 
   const ProfileItem = ({ label, value, icon }) => (
-    <div className="flex items-center p-4 bg-gray-700 rounded-lg border-l-4 border-blue-500 hover:bg-gray-600 transition">
+    <div className="flex items-center p-4 bg-gray-700 rounded-lg border-l-4 border-blue-500">
       <span className="text-xl mr-3">{icon}</span>
       <div>
-        <span className="font-medium text-gray-400 block text-sm">
-          {label}
-        </span>
-        <span className="text-white font-semibold text-lg">
+        <span className="text-gray-400 text-sm block">{label}</span>
+        <span className="text-white text-lg font-semibold">
           {value || "N/A"}
         </span>
       </div>
@@ -75,11 +73,8 @@ const Profile = () => {
     return (
       <div className="bg-gray-900 min-h-screen flex flex-col text-gray-300">
         <Navbar />
-        <main className="flex-grow flex items-center justify-center">
-          <div className="flex items-center space-x-2">
-            <div className="w-5 h-5 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-white text-lg">Loading profile...</p>
-          </div>
+        <main className="flex-grow flex justify-center items-center">
+          <p className="text-white">Loading profile...</p>
         </main>
         <Footer />
       </div>
@@ -90,9 +85,9 @@ const Profile = () => {
     return (
       <div className="bg-gray-900 min-h-screen flex flex-col text-gray-300">
         <Navbar />
-        <main className="flex-grow flex items-center justify-center">
-          <p className="text-red-400 text-lg">
-            {error || "You must be logged in to view this page."}
+        <main className="flex-grow flex justify-center items-center">
+          <p className="text-red-400">
+            {error || "You must login to view this page"}
           </p>
         </main>
         <Footer />
@@ -104,21 +99,21 @@ const Profile = () => {
     <div className="bg-gray-900 min-h-screen flex flex-col text-gray-300">
       <Navbar />
 
-      <main className="flex-grow max-w-3xl w-full mx-auto p-6 md:p-8">
-        <h1 className="text-5xl font-extrabold mb-2 mt-4 text-white">
+      <main className="flex-grow max-w-3xl mx-auto p-8">
+        <h1 className="text-5xl font-bold text-white mb-3">
           Hello, {userInfo.name}! 🌟
         </h1>
 
-        <p className="text-gray-400 mb-10 text-xl">
+        <p className="text-gray-400 mb-10 text-lg">
           Your account details are listed below.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ProfileItem label="Username" value={userInfo.username} icon="🆔" />
           <ProfileItem label="Full Name" value={userInfo.name} icon="🧑‍💻" />
-          <ProfileItem label="Email Address" value={userInfo.email} icon="✉️" />
+          <ProfileItem label="Email" value={userInfo.email} icon="✉️" />
           <ProfileItem label="Age" value={userInfo.age} icon="🎂" />
-          <ProfileItem label="Phone Number" value={userInfo.phone} icon="📞" />
+          <ProfileItem label="Phone" value={userInfo.phone} icon="📞" />
           <ProfileItem label="Address" value={userInfo.address} icon="📍" />
         </div>
       </main>
