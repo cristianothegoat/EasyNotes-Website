@@ -3,6 +3,8 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE = "https://easynotes-backend-btcw.onrender.com";
+
 const Profile = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,14 +22,13 @@ const Profile = () => {
       }
 
       try {
-        const res = await fetch(
-          "https://easynotes-backend-btcw.onrender.com/api/auth/profile",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await fetch(`${API_BASE}/api/auth/profile`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (res.status === 401 || res.status === 403) {
           localStorage.removeItem("token");
@@ -36,11 +37,15 @@ const Profile = () => {
         }
 
         if (!res.ok) {
-          throw new Error("Failed to fetch profile data");
+          throw new Error("Failed to fetch profile");
         }
 
-        const data = await res.json();
+        // Safe JSON parsing
+        const text = await res.text();
+        const data = text ? JSON.parse(text) : {};
+
         setUserInfo(data);
+
       } catch (err) {
         console.error("Profile fetch error:", err);
         setError("Could not load profile. Please login again.");
@@ -56,7 +61,9 @@ const Profile = () => {
     <div className="flex items-center p-4 bg-gray-700 rounded-lg border-l-4 border-blue-500 hover:bg-gray-600 transition">
       <span className="text-xl mr-3">{icon}</span>
       <div>
-        <span className="font-medium text-gray-400 block text-sm">{label}</span>
+        <span className="font-medium text-gray-400 block text-sm">
+          {label}
+        </span>
         <span className="text-white font-semibold text-lg">
           {value || "N/A"}
         </span>
