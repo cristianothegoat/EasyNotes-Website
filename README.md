@@ -1,7 +1,7 @@
 # 📚 EasyNotes
 
 🌐 **Live Website:**  
-https://easynotes-website-bue2.vercel.app/
+https://easy-notes-website.vercel.app/
 
 EasyNotes is a web platform that helps students easily access and share study materials for different subjects.
 The application provides organized notes for various topics and allows users to browse unit-wise study materials in a simple and clean interface.
